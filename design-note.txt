@@ -1,0 +1,63 @@
+Design Note -
+Justification: Users need the ability to create a set of questions for their end users,
+    Needs
+        The user needs the ability to create collections of questions AKA forms.
+        The user needs a GUI to do this.
+        The user needs to be able to save these forms.
+        The user needs to be able to edit these forms.
+        The user needs to be able to delete these forms.
+    Nice to haves
+        The user would like to be able to sort these forms.
+        The user would like to be able to copy questions from one form to another.
+        The user would like to add form validation.
+        The user would like to create multiple sections to keep data visually and structurally separated 
+
+name: Form builder
+description: Build and save forms.
+
+UI:
+    Tool panel - left side.
+        initial - shows list of existing forms
+            list of forms
+                contains an add new form button
+                shows blank state ( add a form ) if no forms exist
+                shows list of existing saved forms
+            When form is adding / editing
+                shows form elements ( may move this to some sort of in-context add / remove )
+                when field is selected - shows field info / settings
+                    isRequired
+                    name
+                    description
+                    id
+                    etc.
+    In Context editing panel - main panel
+        initial - shows blank state
+        form selected - shows form
+            form edit / add
+                (may show in context tools )
+                    ( add/remove field )
+                    ( Allows inline editing of name, description, options )
+
+Schema:
+{
+    "form": {
+        "id": 1,
+        "name": "test",
+        "group": "js",
+        "sections": [
+            {
+                "name": "main",            
+                "fields": [
+                    {
+                        "id": 101,
+                        "name": "field one",
+                        "type": "short_text",
+                        "description": "what is the average air speed velocity of a laden swallow",
+                        "isRequired": false,
+                        "validationRules": []
+                    }
+                ]
+            }
+        ]
+    }
+}
