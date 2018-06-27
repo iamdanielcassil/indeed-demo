@@ -20,7 +20,6 @@ class Main extends React.Component {
 			<div className={styles.row} key={form.id} onClick={() => {this.onClick(form.id)}}>
 				<div className={styles.toolBar}>
 					{form.name}
-					<button className="button">Edit</button>
 				</div>
 				<div className={styles.body}>
 				</div>

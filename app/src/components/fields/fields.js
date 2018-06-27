@@ -15,10 +15,14 @@ class Main extends React.Component {
 	}
 	remove() {
 		let id = this.props.field.id;
-		
+
 		actions.forms.removeField(id);
 	}
 	renderFieldEditControsl() {
+		console.log(this.props)
+		if (!this.props.isEditing) {
+			return;
+		}
 		return (
 			<div className={styles.editControls} >
 				<div className={styles.remove} onClick={this.remove}>Remove</div>
@@ -39,7 +43,7 @@ class Main extends React.Component {
 		return (
 			<div onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
 				{isHovering ? this.renderFieldEditControsl() : ''}
-				<Field {...field} />
+				<Field isEditing={this.props.isEditing} {...field} />
 			</div>
 		)
 	}

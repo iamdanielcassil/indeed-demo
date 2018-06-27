@@ -9,11 +9,29 @@ class Main extends React.Component {
 	constructor() {
 		super();
 
+		this.editClick = this.editClick.bind(this);
+		this.stopEditClick = this.stopEditClick.bind(this);
 		this.renderForm = this.renderForm.bind(this);
 		this.renderFormSection = this.renderFormSection.bind(this);
+		this.renderField = this.renderField.bind(this);
+	}
+	editClick() {
+		this.setState({
+			isEditing: true
+		});
+	}
+	stopEditClick() {
+		this.setState({
+			isEditing: false
+		});
 	}
 	renderField(field) {
-		return <Fields field={field} />
+		let isEditing = this.state && this.state.isEditing;
+		let className = styles.field;
+		
+		className += isEditing ? ' ' + styles.highlight : '';
+
+		return <div className={className} ><Fields field={field} isEditing={isEditing} /></div>
 	}
 	renderFormSection(section) {
 		return (
@@ -31,16 +49,23 @@ class Main extends React.Component {
 	}
 	renderForm() {
 		let form = this.props.form.data;
-		
+		let isEditing = this.state && this.state.isEditing;
+		let button = <button className={styles.edit} onClick={this.editClick}>Edit</button>;
+
 		if (!form.sections) {
 			return <div>Blank State</div>
 		}
 
-		return (
-			<div className={styles.wrapper}>
-				{form.name}
-				{form.sections.map(this.renderFormSection)}
-				</div>
+		if (isEditing) {
+			button = <button className={styles.edit} onClick={this.stopEditClick}>Done</button>
+		}
+
+		return (				
+				( <div className={styles.wrapper}>
+					{button}
+					{form.name}
+					{form.sections.map(this.renderFormSection)}
+				</div>)
 		)
 	}
 	render() {

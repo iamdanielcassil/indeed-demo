@@ -15,3 +15,26 @@
 .sectionBody {
 
 }
+.edit {
+	position: absolute;
+	background: rgba(black, .1);
+	top: 25px;
+	right: 25px;
+	padding: 10px 25px;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.field {
+	margin-bottom: 5px;
+	background: rgba(black, .1);
+	padding: 15px 25px;
+}
+
+.highlight:hover {
+	outline: 2px solid rgba(rgb(255, 221, 146), .5)
+}

@@ -23,7 +23,14 @@ class Main extends React.Component {
 		this.inputSelected = true;
 	}
 	renderForDisplay() {
-		console.log(this.props)
+		return (
+			<div>
+				<div>{this.props.name}</div>
+				<div>{this.props.description}</div>
+			</div>
+		)
+	}
+	renderInEditMode() {
 		return (
 			<div>
 				<InlineEdit text={this.props.name}
@@ -35,11 +42,8 @@ class Main extends React.Component {
 			</div>
 		)
 	}
-	renderInEditMode() {
-		return <div></div>
-	}
 	render() {
-		let isInEdit = this.props.editting;
+		let isInEdit = this.props.isEditing;
 
 		if (isInEdit) {
 			return this.renderInEditMode()
