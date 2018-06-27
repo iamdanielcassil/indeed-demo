@@ -1,7 +1,11 @@
-import * as pages from 'actions/pages';
+import * as screens from 'actions/screens';
+import * as forms from 'actions/forms';
+import * as fields from 'actions/fields';
 
 const actions = { 
-	pages,
+	screens,
+	forms,
+	fields,
 };
 
 for (let key in actions) {

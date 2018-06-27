@@ -1,10 +1,12 @@
 import * as store from 'foundations/store';
+import * as http from 'foundations/http';
 
-const foundations = { 
+const foundations = {
+	http,
 	store,
 };
 
-for (let key in actions) {
+for (let key in foundations) {
 	let action = foundations[key];
 
 	// Some base actions files like logic and cookies don't use other actions so they won't have init
@@ -14,6 +16,6 @@ for (let key in actions) {
 }
 
 window.APP = window.APP || {};
-document.APP.FOUNDATIONS_API = foundations;
+window.APP.FOUNDATIONS_API = foundations;
 export default foundations;
 	

@@ -2,15 +2,32 @@ const toystore = require('toystore');
 const toystoreReact = require('toystore-react');
 
 const keys = {
-	pages: {
-		app: _defaultAsyncData([]),
+	screens: {
+		selectedKey: _defaultAsyncData('main'),
+	},
+	forms: {
+		all: _defaultAsyncData([]),
+		selected: _defaultAsyncData({}),
 	}
 };
 
 let store = toystore.create(keys);
 
+function set(key, data) {
+	if (data && typeof data.then === 'function') {
+		store.asyncSet(key, data)
+	} else {
+		_wrapAndSetAsAsync(key, data);
+	}
+}
+
 store.asyncSet = function (key, dataPromise) {
 	let storeData = store.get(key);
+
+	// convert non promise to promise.
+	if (!dataPromise || typeof dataPromise.then !== 'function') {
+		dataPromise = Promise.resolve(dataPromise);
+	}
 
 	storeData.isLoading = true;
 	storeData.isBlankState = _isBlank(storeData);
@@ -23,11 +40,12 @@ store.asyncSet = function (key, dataPromise) {
 
 		store.set(key, storeData);
 	}).catch(data => {
-		storeData.data = data;
+		storeData.data = `<div></div>`;
 		storeData.isLoading = false;
 		storeData.isBlankState = _isBlank(data);
 		storeData.isError = true;
 
+		console.log(data);
 		store.set(key, storeData);
 	});
 
